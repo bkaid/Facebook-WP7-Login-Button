@@ -1,0 +1,28 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Facebook.WP7.Controls.FacebookLoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+  <Grid Background="Transparent">
+    <StackPanel x:Name="TitlePanel">
+      <Grid Background="#FF3B5998">
+        <TextBlock x:Name="PageTitle" Text="facebook" Margin="12,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
+      </Grid>
+      <Grid Height="576">
+        <phone:WebBrowser x:Name="facebookLoginBrowser" IsScriptEnabled="True" Navigated="FacebookLoginBrowserNavigated" Visibility="Collapsed"/>
+        <TextBlock x:Name="LoginStatusText" Text="Logging into Facebook..." HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <ProgressBar x:Name="LoginProgressBar" VerticalAlignment="Center" IsIndeterminate="True" Margin="0,53,0,0" Foreground="#FF3B5998"/>
+      </Grid>
+    </StackPanel>
+  </Grid>
+</phone:PhoneApplicationPage>
