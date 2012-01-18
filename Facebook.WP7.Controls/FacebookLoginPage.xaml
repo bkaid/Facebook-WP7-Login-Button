@@ -10,19 +10,18 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
-
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False">
   <Grid Background="Transparent">
-    <StackPanel x:Name="TitlePanel">
-      <Grid Background="#FF3B5998">
-        <TextBlock x:Name="PageTitle" Text="facebook" Margin="12,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
-      </Grid>
-      <Grid Height="576">
-        <phone:WebBrowser x:Name="facebookLoginBrowser" IsScriptEnabled="True" Navigated="FacebookLoginBrowserNavigated" Visibility="Collapsed"/>
-        <TextBlock x:Name="LoginStatusText" Text="Logging into Facebook..." HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <ProgressBar x:Name="LoginProgressBar" VerticalAlignment="Center" IsIndeterminate="True" Margin="0,53,0,0" Foreground="#FF3B5998"/>
-      </Grid>
-    </StackPanel>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Image x:Name="FacebookLogo" Source="facebook.jpg" Grid.Row="0" Visibility="Collapsed" />
+    <Grid Grid.Row="1">
+      <phone:WebBrowser x:Name="facebookLoginBrowser" IsScriptEnabled="True" Navigated="FacebookLoginBrowserNavigated" LoadCompleted="FacebookLoginBrowserLoadCompleted" Visibility="Collapsed"/>
+      <TextBlock x:Name="LoginStatusText" Text="Logging into Facebook..." HorizontalAlignment="Center" VerticalAlignment="Center" />
+      <ProgressBar x:Name="LoginProgressBar" VerticalAlignment="Center" IsIndeterminate="True" Margin="0,53,0,0" Foreground="#FF3B5998"/>
+    </Grid>
   </Grid>
 </phone:PhoneApplicationPage>

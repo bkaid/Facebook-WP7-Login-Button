@@ -23,6 +23,7 @@ namespace Facebook.WP7.Controls {
             if (!string.IsNullOrWhiteSpace(AccessToken)) {
                 LoginStatusText.Visibility = Visibility.Visible;
                 LoginProgressBar.Visibility = Visibility.Visible;
+                FacebookLogo.Visibility = Visibility.Collapsed;
 
                 var webRequest = WebRequest.CreateHttp("https://graph.facebook.com/me?access_token=" + AccessToken);
                 webRequest.Method = "GET";
@@ -49,6 +50,7 @@ namespace Facebook.WP7.Controls {
             LoadCompletedEventHandler loadCompleted = null;
             loadCompleted = (sender, e) => {
                 if (facebookLoginBrowser.SaveToString().Contains("logout_form")) {
+                    FacebookLogo.Visibility = Visibility.Visible;
                     facebookLoginBrowser.InvokeScript("eval", "document.forms['logout_form'].submit();");
                     facebookLoginBrowser.Visibility = Visibility.Collapsed;
                     facebookLoginBrowser.LoadCompleted -= loadCompleted;
@@ -62,6 +64,16 @@ namespace Facebook.WP7.Controls {
             facebookLoginBrowser.Navigated -= FacebookLoginBrowserNavigated;
             facebookLoginBrowser.LoadCompleted += loadCompleted;
             facebookLoginBrowser.Navigate(new Uri("https://www.facebook.com/logout.php"));
+        }
+
+        private void FacebookLoginBrowserLoadCompleted(object sender, NavigationEventArgs e) {
+            if (e.Uri.ToString().Contains("login.php")) {
+                try {
+                    // remove Facebook logo from login page since view has one.
+                    facebookLoginBrowser.InvokeScript("eval", "document.querySelector('div.acb').style.display = 'none';");
+                }
+                catch (SystemException) {}
+            }
         }
 
         private void NavigateToLoginUrl() {
@@ -100,6 +112,7 @@ namespace Facebook.WP7.Controls {
         private void FacebookLoginBrowserNavigated(object sender, NavigationEventArgs e) {
             if (string.IsNullOrEmpty(e.Uri.Fragment)) {
                 facebookLoginBrowser.Visibility = Visibility.Visible;
+                FacebookLogo.Visibility = Visibility.Visible;
                 LoginProgressBar.Visibility = Visibility.Collapsed;
                 LoginStatusText.Visibility = Visibility.Collapsed;
                 return;
