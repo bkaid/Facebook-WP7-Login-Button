@@ -118,7 +118,7 @@ namespace Facebook.WP7.Controls {
                 return;
             }
 
-            if (e.Uri.AbsoluteUri.Replace(e.Uri.Fragment, "") == RedirectUrl) {
+            if (e.Uri.AbsoluteUri.StartsWith(RedirectUrl)) {
                 string text = HttpUtility.HtmlDecode(e.Uri.Fragment).TrimStart('#');
                 var pairs = text.Split('&');
                 foreach (var pair in pairs) {
@@ -131,6 +131,8 @@ namespace Facebook.WP7.Controls {
                         }
                     }
                 }
+                // access_token not found or user rejected app
+                CloseLoginPage();
             }
         }
     }
