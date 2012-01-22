@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Facebook-WP7-Login-Button</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>OffBySome</authors>
     <owners>OffBySome</owners>
     <licenseUrl>https://github.com/offbysome/Facebook-WP7-Login-Button/raw/master/license.txt</licenseUrl>
@@ -10,7 +10,7 @@
     <iconUrl>https://github.com/offbysome/Facebook-WP7-Login-Button/raw/master/FacebookLoginSample/Background.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Facebook login button control for WP7 that pops up a page to prompt the user to login to Facebook, approve your app, and return an access token.</description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <releaseNotes>Close browser page when user rejects app.</releaseNotes>
     <tags>Facebook WP7 OAuth Windows-Phone-7 Mango</tags>
     <dependencies />
   </metadata>
