@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 namespace Facebook.WP7.Controls {
     public partial class FacebookLoginPage : IFacebookLoginPage {
         private const string RedirectUrl = "http://www.facebook.com/connect/login_success.html";
+        private const string FinishingUrl = "/connect/login_success.html";
         private const string StateKeyValue = "FacebookLoginPageStateValue";
 
         public FacebookLoginPage() {
@@ -118,7 +119,8 @@ namespace Facebook.WP7.Controls {
                 return;
             }
 
-            if (e.Uri.AbsoluteUri.StartsWith(RedirectUrl)) {
+            if (e.Uri.AbsolutePath.StartsWith(FinishingUrl, StringComparison.InvariantCultureIgnoreCase))
+            {
                 string text = HttpUtility.HtmlDecode(e.Uri.Fragment).TrimStart('#');
                 var pairs = text.Split('&');
                 foreach (var pair in pairs) {
